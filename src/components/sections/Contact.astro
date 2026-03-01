@@ -1,0 +1,125 @@
+---
+import { siteConfig, socialLinks } from '../../data/site';
+import { getLocale } from '../../i18n';
+import type { Lang } from '../../i18n';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props;
+const t = getLocale(lang);
+---
+
+<section id="contact" class="section-alt py-24 scroll-mt-20">
+  <div class="mx-auto max-w-4xl px-6">
+    <h2 class="section-heading mb-10">
+      {t.contact.heading}
+      <span class="section-heading-bar"></span>
+    </h2>
+
+    <div class="grid gap-16 md:grid-cols-2">
+      <div class="flex flex-col gap-6">
+        <p class="text-muted leading-7">{t.contact.body}</p>
+        <a href={`mailto:${siteConfig.email}`} class="font-medium text-accent hover:underline">
+          {siteConfig.email}
+        </a>
+        <ul class="flex gap-4">
+          {
+            socialLinks.map((link) => (
+              <li>
+                <a href={link.href} target="_blank" rel="noopener noreferrer" class="social-link">
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <form id="contact-form" class="flex flex-col gap-5" novalidate>
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label for="name" class="form-label">{t.contact.form.name}</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              placeholder={t.contact.form.namePlaceholder}
+              class="form-input"
+            />
+          </div>
+          <div>
+            <label for="email" class="form-label">{t.contact.form.email}</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              placeholder={t.contact.form.emailPlaceholder}
+              class="form-input"
+            />
+          </div>
+        </div>
+        <div>
+          <label for="message" class="form-label">{t.contact.form.message}</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="5"
+            required
+            placeholder={t.contact.form.messagePlaceholder}
+            class="form-input resize-none"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-md self-start" id="submit-btn">
+          {t.contact.form.send}
+        </button>
+      </form>
+
+      <div
+        id="contact-success"
+        class="hidden md:col-start-2 md:row-start-1 items-center justify-center rounded-2xl border p-8 text-center"
+        style="border-color: #bbf7d0; background-color: #f0fdf4;"
+      >
+        <div>
+          <div
+            class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full"
+            style="background-color: #dcfce7;"
+          >
+            <svg
+              class="h-6 w-6"
+              style="color: #16a34a;"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+          <h3 class="font-semibold" style="color: #166534;" set:text={t.contact.success.title} />
+          <p class="mt-1 text-sm" style="color: #15803d;" set:text={t.contact.success.body} />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const success = document.getElementById('contact-success') as HTMLElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.textContent = submitBtn.dataset.sending ?? 'Sending…';
+
+    await new Promise((r) => setTimeout(r, 1000));
+
+    form.classList.add('hidden');
+    success.classList.remove('hidden');
+    success.classList.add('flex');
+  });
+</script>
