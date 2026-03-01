@@ -1,0 +1,57 @@
+---
+import { siteConfig } from '../../data/site';
+import type { Lang } from '../../i18n';
+import { getLocale } from '../../i18n';
+
+const lang = (Astro.cookies.get('lang')?.value ?? 'en') as Lang;
+const t = getLocale(lang);
+---
+
+<section id="about" class="mx-auto max-w-5xl px-6 py-24 scroll-mt-20">
+  <h2 class="section-heading">{t.about.heading}</h2>
+  <div class="section-heading-bar"></div>
+
+  <div class="mt-12 grid gap-12 md:grid-cols-2 md:gap-16 items-center">
+    <div class="flex justify-center md:justify-start">
+      <div
+        class="h-64 w-64 overflow-hidden rounded-2xl flex items-center justify-center text-6xl font-bold select-none"
+        style="background-color: var(--color-surface); color: var(--color-border)"
+      >
+        {siteConfig.name.charAt(0)}
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-5 leading-7" style="color: var(--color-text-muted)">
+      {
+        t.about.bio.map((para) => (
+          <p
+            set:html={para
+              .replace(
+                '{role}',
+                `<strong style="color: var(--color-text)">${siteConfig.role}</strong>`
+              )
+              .replace(
+                '{location}',
+                `<strong style="color: var(--color-text)">${siteConfig.location}</strong>`
+              )}
+          />
+        ))
+      }
+
+      <dl class="mt-2 flex flex-wrap gap-6">
+        <div>
+          <dt class="label-caps">{t.about.meta.location}</dt>
+          <dd class="mt-1 text-sm" style="color: var(--color-text)">{siteConfig.location}</dd>
+        </div>
+        <div>
+          <dt class="label-caps">{t.about.meta.email}</dt>
+          <dd class="mt-1 text-sm">
+            <a href={`mailto:${siteConfig.email}`} class="text-accent hover:underline"
+              >{siteConfig.email}</a
+            >
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>

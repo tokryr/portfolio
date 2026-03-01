@@ -156,4 +156,9 @@ body {
       color: var(--color-accent);
     }
   }
+
+  .label-caps {
+    @apply text-xs font-semibold uppercase tracking-widest;
+    color: var(--color-text-muted);
+  }
 }
