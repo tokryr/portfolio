@@ -1,0 +1,53 @@
+---
+import { siteConfig, socialLinks } from '../../data/site';
+import type { Lang } from '../../i18n';
+import { getLocale } from '../../i18n';
+
+const lang = (Astro.cookies.get('lang')?.value ?? 'en') as Lang;
+const t = getLocale(lang);
+---
+
+<section id="hero" class="relative flex min-h-screen items-center justify-center overflow-hidden">
+  <div class="relative mx-auto max-w-5xl px-6 py-32 text-center">
+    {
+      siteConfig.availableForWork && (
+        <span class="available-badge">
+          <span class="available-dot" />
+          {t.hero.availableBadge}
+        </span>
+      )
+    }
+
+    <h1 class="mt-4 text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
+      {t.hero.greeting}
+      <span class="text-accent">{siteConfig.name}</span>
+    </h1>
+
+    <p class="mx-auto mt-6 max-w-2xl text-xl leading-8" style="color: var(--color-text-muted)">
+      {siteConfig.tagline}
+    </p>
+
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+      <a href="#projects" class="btn btn-primary btn-lg">{t.hero.cta.work}</a>
+      <a href="#contact" class="btn btn-secondary btn-lg">{t.hero.cta.contact}</a>
+    </div>
+
+    <ul class="mt-10 flex items-center justify-center gap-6">
+      {
+        socialLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={link.label}
+              class="social-link"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

@@ -128,4 +128,32 @@ body {
   .btn-lg {
     @apply px-6 py-3 text-base rounded-full;
   }
+
+  .section-heading {
+    @apply text-3xl font-bold tracking-tight;
+  }
+
+  .section-heading-bar {
+    @apply mt-3 h-1 w-10 rounded-full;
+    background-color: var(--color-accent);
+  }
+
+  .available-badge {
+    @apply inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium border;
+    border-color: var(--color-border);
+    color: var(--color-text-muted);
+  }
+
+  .available-dot {
+    @apply h-2 w-2 rounded-full animate-pulse;
+    background-color: #22c55e;
+  }
+
+  .social-link {
+    @apply text-sm transition-colors duration-200;
+    color: var(--color-text-muted);
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
 }
