@@ -1,11 +1,12 @@
 ---
 import '../styles/global.css';
 import Navbar from '../components/layout/Navbar.astro';
+import type { Lang } from '../i18n';
 
 interface Props {
   title?: string;
   description?: string;
-  lang?: string;
+  lang?: Lang;
 }
 
 const {
@@ -34,7 +35,7 @@ const {
     <title>{title}</title>
   </head>
   <body class="antialiased">
-    <Navbar />
+    <Navbar lang={lang} />
     <slot />
   </body>
 </html>

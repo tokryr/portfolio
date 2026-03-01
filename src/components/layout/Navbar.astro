@@ -3,7 +3,10 @@ import { siteConfig, navLinks } from '../../data/site';
 import { getLocale } from '../../i18n';
 import type { Lang } from '../../i18n';
 
-const lang = (Astro.cookies.get('lang')?.value ?? 'en') as Lang;
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
 const t = getLocale(lang);
 ---
 
@@ -99,8 +102,7 @@ const t = getLocale(lang);
   document.querySelectorAll<HTMLButtonElement>('.lang-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
       const lang = btn.dataset.lang!;
-      document.cookie = `lang=${lang};path=/;max-age=31536000`;
-      window.location.reload();
+      window.location.href = lang === 'en' ? '/' : `/${lang}`;
     });
   });
 </script>

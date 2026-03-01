@@ -3,7 +3,10 @@ import { siteConfig, socialLinks } from '../../data/site';
 import type { Lang } from '../../i18n';
 import { getLocale } from '../../i18n';
 
-const lang = (Astro.cookies.get('lang')?.value ?? 'en') as Lang;
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
 const t = getLocale(lang);
 ---
 

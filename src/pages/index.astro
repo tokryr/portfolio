@@ -3,12 +3,14 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/sections/Hero.astro';
 import About from '../components/sections/About.astro';
 import Skills from '../components/sections/Skills.astro';
+
+const lang = 'en';
 ---
 
-<Layout>
+<Layout lang={lang}>
   <main>
-    <Hero />
-    <About />
-    <Skills />
+    <Hero lang={lang} />
+    <About lang={lang} />
+    <Skills lang={lang} />
   </main>
 </Layout>

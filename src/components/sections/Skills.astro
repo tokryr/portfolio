@@ -4,7 +4,10 @@ import type { Lang } from '../../i18n';
 import { getLocale } from '../../i18n';
 import type { Skill } from '../../types';
 
-const lang = (Astro.cookies.get('lang')?.value ?? 'en') as Lang;
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
 const t = getLocale(lang);
 
 const categoryOrder: Skill['category'][] = ['frontend', 'backend', 'tooling', 'other'];

@@ -1,0 +1,16 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/sections/Hero.astro';
+import About from '../../components/sections/About.astro';
+import Skills from '../../components/sections/Skills.astro';
+
+const lang = 'fi';
+---
+
+<Layout lang={lang}>
+  <main>
+    <Hero lang={lang} />
+    <About lang={lang} />
+    <Skills lang={lang} />
+  </main>
+</Layout>
