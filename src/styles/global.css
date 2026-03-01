@@ -161,4 +161,11 @@ body {
     @apply text-xs font-semibold uppercase tracking-widest;
     color: var(--color-text-muted);
   }
+
+  .skill-pill {
+    @apply inline-flex items-center rounded-full px-3 py-1 text-sm border;
+    border-color: var(--color-border);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+  }
 }

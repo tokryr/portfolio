@@ -1,0 +1,42 @@
+---
+import { skills } from '../../data/site';
+import type { Lang } from '../../i18n';
+import { getLocale } from '../../i18n';
+import type { Skill } from '../../types';
+
+const lang = (Astro.cookies.get('lang')?.value ?? 'en') as Lang;
+const t = getLocale(lang);
+
+const categoryOrder: Skill['category'][] = ['frontend', 'backend', 'tooling', 'other'];
+
+const grouped = {
+  frontend: skills.filter((s) => s.category === 'frontend'),
+  backend: skills.filter((s) => s.category === 'backend'),
+  tooling: skills.filter((s) => s.category === 'tooling'),
+  other: skills.filter((s) => s.category === 'other'),
+};
+---
+
+<section id="skills" class="scroll-mt-20" style="background-color: var(--color-bg-subtle)">
+  <div class="mx-auto max-w-5xl px-6 py-24">
+    <h2 class="section-heading">{t.skills.heading}</h2>
+    <div class="section-heading-bar"></div>
+
+    <div class="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        categoryOrder
+          .filter((cat) => grouped[cat].length > 0)
+          .map((cat) => (
+            <div>
+              <h3 class="label-caps text-accent mb-4">{t.skills.categories[cat]}</h3>
+              <ul class="flex flex-wrap gap-2">
+                {grouped[cat].map((skill) => (
+                  <li class="skill-pill">{skill.name}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+      }
+    </div>
+  </div>
+</section>
