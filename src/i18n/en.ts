@@ -17,7 +17,11 @@ const en = {
   },
   about: {
     heading: 'About Me',
-    bio: ["I'm an epic software developer"],
+    bio: [
+      'I have nearly two years of experience in frontend development, working primarily with TypeScript, React, and Next.js to build scalable web applications.',
+      'My studies in Information and Communications Technology at the {university} gave me a strong technical foundation and helped develop my collaborative and open personality — making me a great fit for teams that value dynamism.',
+      'I am genuinely passionate about using my skills in projects that are not only innovative but also have a positive impact. I am currently completing my {degree} and looking forward to joining a team where I can contribute effectively and keep growing.',
+    ],
     meta: {
       location: 'Location',
       email: 'Email',

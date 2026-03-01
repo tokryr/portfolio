@@ -38,6 +38,14 @@ const t = getLocale(lang);
           <p
             set:html={para
               .replace(
+                '{university}',
+                `<strong style="color: var(--color-text)">${siteConfig.university}</strong>`
+              )
+              .replace(
+                '{degree}',
+                `<strong style="color: var(--color-text)">${siteConfig.degree}</strong>`
+              )
+              .replace(
                 '{role}',
                 `<strong style="color: var(--color-text)">${siteConfig.role}</strong>`
               )

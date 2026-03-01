@@ -19,7 +19,11 @@ const fi: Locale = {
   },
   about: {
     heading: 'Tietoa minusta',
-    bio: ['Olen eeppinen softakehittäjä'],
+    bio: [
+      'Minulla on lähes kaksi vuotta kokemusta frontend-kehityksestä, ja olen työskennellyt pääasiassa TypeScriptin, Reactin ja Next.js:n kanssa skaalautuvien web-sovellusten parissa.',
+      'Tieto- ja viestintätekniikan opintoni {university} antoivat minulle vahvan teknisen pohjan ja auttoivat kehittämään avointa ja yhteisöllistä persoonallisuuttani — olen parhaimmillani tiimeissä, joissa arvostetaan dynaamisuutta.',
+      'Olen aidosti intohimoinen käyttämään taitojani projekteissa, jotka ovat innovatiivisia ja joilla on positiivinen vaikutus. Suoritan parhaillaan {degree} -tutkintoani ja etsin tiimiä, jossa voin kehittyä ja vaikuttaa.',
+    ],
     meta: {
       location: 'Sijainti',
       email: 'Sähköposti',
