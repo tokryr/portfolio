@@ -10,8 +10,11 @@ const { lang = 'en' } = Astro.props;
 const t = getLocale(lang);
 ---
 
-<section id="hero" class="relative flex min-h-screen items-center justify-center overflow-hidden">
-  <div class="relative mx-auto max-w-5xl px-6 py-32 text-center">
+<section
+  id="hero"
+  class="hero-section relative flex min-h-screen items-center justify-center overflow-hidden"
+>
+  <div class="relative mx-auto max-w-3xl px-6 py-32 text-center">
     {
       siteConfig.availableForWork && (
         <span class="available-badge">
@@ -21,12 +24,14 @@ const t = getLocale(lang);
       )
     }
 
-    <h1 class="mt-4 text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
-      {t.hero.greeting}
+    <h1 class="mt-6 text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
+      {t.hero.greeting}{' '}
       <span class="text-accent">{siteConfig.name}</span>
     </h1>
 
-    <p class="mx-auto mt-6 max-w-2xl text-xl leading-8" style="color: var(--color-text-muted)">
+    <p class="mt-4 text-lg font-medium tracking-wide text-muted">{siteConfig.role}</p>
+
+    <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-muted">
       {siteConfig.tagline}
     </p>
 
@@ -53,4 +58,20 @@ const t = getLocale(lang);
       }
     </ul>
   </div>
+
+  <a
+    href="#about"
+    aria-label="Scroll down"
+    class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-muted opacity-60 hover:opacity-100 transition-opacity"
+  >
+    <span class="text-xs tracking-widest uppercase">Scroll</span>
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="animate-bounce">
+      <path
+        d="M8 3v10M3 9l5 5 5-5"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </svg>
+  </a>
 </section>

@@ -30,7 +30,10 @@ const grouped = {
         categoryOrder
           .filter((cat) => grouped[cat].length > 0)
           .map((cat) => (
-            <div>
+            <div
+              class="rounded-xl p-5"
+              style="background-color: var(--color-bg); border: 1px solid var(--color-border);"
+            >
               <h3 class="label-caps text-accent mb-4">{t.skills.categories[cat]}</h3>
               <ul class="flex flex-wrap gap-2">
                 {grouped[cat].map((skill) => (

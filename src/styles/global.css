@@ -39,6 +39,14 @@ body {
   color: var(--color-text);
 }
 
+.hero-section {
+  background-image: radial-gradient(
+    ellipse 80% 50% at 50% -10%,
+    color-mix(in srgb, var(--color-accent) 12%, transparent),
+    transparent
+  );
+}
+
 @layer components {
   .nav-link {
     @apply text-sm transition-colors duration-200;
@@ -130,7 +138,7 @@ body {
   }
 
   .section-heading {
-    @apply text-3xl font-bold tracking-tight;
+    @apply block text-3xl font-bold tracking-tight;
   }
 
   .section-heading-bar {
