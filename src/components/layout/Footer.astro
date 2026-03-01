@@ -1,0 +1,35 @@
+---
+import { siteConfig, socialLinks } from '../../data/site';
+import { getLocale } from '../../i18n';
+import type { Lang } from '../../i18n';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props;
+const t = getLocale(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t py-10" style="border-color: var(--color-border);">
+  <div
+    class="mx-auto flex max-w-5xl flex-col items-center gap-4 px-6 sm:flex-row sm:justify-between"
+  >
+    <p class="text-sm text-muted">
+      &copy; {year}
+      {siteConfig.name}. {t.footer.rights}
+    </p>
+    <ul class="flex items-center gap-5">
+      {
+        socialLinks.map((link) => (
+          <li>
+            <a href={link.href} target="_blank" rel="noopener noreferrer" class="social-link">
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</footer>
