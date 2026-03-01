@@ -168,4 +168,20 @@ body {
     background-color: var(--color-bg);
     color: var(--color-text);
   }
+
+  .project-card {
+    @apply rounded-2xl p-6 border;
+    border-color: var(--color-border);
+    background-color: var(--color-bg-subtle);
+  }
+
+  .project-card-sm {
+    @apply rounded-xl p-5 border;
+    border-color: var(--color-border);
+    background-color: var(--color-bg);
+  }
+
+  .section-alt {
+    background-color: var(--color-bg-subtle);
+  }
 }

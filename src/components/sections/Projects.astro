@@ -1,0 +1,119 @@
+---
+import { projects } from '../../data/site';
+import { getLocale } from '../../i18n';
+import type { Lang } from '../../i18n';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props;
+const t = getLocale(lang);
+
+const featured = projects.filter((p) => p.featured);
+const others = projects.filter((p) => !p.featured);
+---
+
+<section id="projects" class="py-24 scroll-mt-20">
+  <div class="mx-auto max-w-4xl px-6">
+    <h2 class="section-heading mb-10">
+      {t.projects.heading}
+      <span class="section-heading-bar"></span>
+    </h2>
+
+    <ul class="grid gap-8 md:grid-cols-2">
+      {
+        featured.map((project) => (
+          <li>
+            <article class="project-card flex flex-col h-full">
+              <div class="mb-5 flex h-40 w-full items-center justify-center overflow-hidden rounded-xl bg-(--color-bg-subtle)">
+                {project.imageUrl ? (
+                  <img
+                    src={project.imageUrl}
+                    alt={project.title}
+                    class="h-full w-full object-cover"
+                  />
+                ) : (
+                  <span class="select-none text-4xl font-bold text-(--color-border)">
+                    {project.title.charAt(0).toUpperCase()}
+                  </span>
+                )}
+              </div>
+              <h3 class="text-lg font-semibold text-(--color-text)">{project.title}</h3>
+              <p class="mt-2 flex-1 text-sm leading-6 text-muted">{project.description}</p>
+              <ul class="mt-4 flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <li class="skill-pill text-xs">{tag}</li>
+                ))}
+              </ul>
+              <div class="mt-5 flex gap-3">
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-primary btn-sm"
+                  >
+                    {t.projects.liveDemo}
+                  </a>
+                )}
+                {project.repoUrl && (
+                  <a
+                    href={project.repoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-secondary btn-sm"
+                  >
+                    {t.projects.source}
+                  </a>
+                )}
+              </div>
+            </article>
+          </li>
+        ))
+      }
+    </ul>
+
+    {
+      others.length > 0 && (
+        <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {others.map((project) => (
+            <li>
+              <article class="project-card-sm flex flex-col h-full">
+                <h3 class="text-base font-semibold text-(--color-text)">{project.title}</h3>
+                <p class="mt-2 flex-1 text-sm leading-6 text-muted">{project.description}</p>
+                <ul class="mt-3 flex flex-wrap gap-1.5">
+                  {project.tags.map((tag) => (
+                    <li class="skill-pill text-xs">{tag}</li>
+                  ))}
+                </ul>
+                <div class="mt-4 flex gap-3">
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-sm text-accent hover:underline"
+                    >
+                      {t.projects.live}
+                    </a>
+                  )}
+                  {project.repoUrl && (
+                    <a
+                      href={project.repoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-sm text-muted hover:text-accent transition-colors"
+                    >
+                      {t.projects.repo}
+                    </a>
+                  )}
+                </div>
+              </article>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</section>
