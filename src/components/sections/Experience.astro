@@ -1,0 +1,49 @@
+---
+import { experiences } from '../../data/site';
+import { getLocale } from '../../i18n';
+import type { Lang } from '../../i18n';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props;
+const t = getLocale(lang);
+---
+
+<section id="experience" class="section-alt py-24 scroll-mt-20">
+  <div class="mx-auto max-w-2xl px-6">
+    <h2 class="section-heading">
+      {t.experience.heading}
+      <span class="section-heading-bar"></span>
+    </h2>
+
+    <ol class="relative ml-3 border-l border-(--color-border)">
+      {
+        experiences.map((exp) => (
+          <li class="mb-10 ml-8 last:mb-0">
+            <span
+              class:list={[
+                'absolute -left-2 flex h-4 w-4 items-center justify-center rounded-full ring-4 ring-(--color-bg-subtle)',
+                exp.current ? 'bg-(--color-accent)' : 'bg-(--color-border)',
+              ]}
+            />
+            <div class="flex flex-col gap-1">
+              <time class="label-caps text-muted">{exp.period}</time>
+              <h3 class="text-base font-semibold text-(--color-text)">{exp.role}</h3>
+              <p class="text-sm font-medium text-accent">{exp.company}</p>
+              <ul class="mt-2 space-y-1.5">
+                {exp.description.map((point) => (
+                  <li class="flex items-start gap-2 text-sm text-muted">
+                    <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-(--color-border)" />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
